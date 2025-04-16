@@ -1,10 +1,14 @@
 const fs = require("fs");
 const { google } = require("googleapis");
+const credentialsJson = process.env.GOOGLE_CREDENTIALS;
+
+const credentialsPath = 'credentials.json';
+fs.writeFileSync(credentialsPath, JSON.stringify(JSON.parse(credentialsJson)));
 
 const SCOPES = ["https://www.googleapis.com/auth/drive"];  // Permission to interact with Google Drive
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: "credentials.json",  // Path to the credentials file
+  keyFile: credentialsPath,
   scopes: SCOPES,
 });
 
